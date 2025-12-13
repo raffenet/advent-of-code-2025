@@ -21,12 +21,23 @@ def check(i, j):
     return rolls < 4
 
 p1 = 0
-p2 = 0
-grid = [each.strip() for each in input.readlines()]
+grid = [list(each.strip()) for each in input.readlines()]
 for i in range(len(grid)):
     for j in range(len(grid[i])):
         if grid[i][j] == '@' and check(i,j):
             p1 = p1 + 1
+
+p2 = 0
+p2_old = 0
+while True:
+    for i in range(len(grid)):
+        for j in range(len(grid[i])):
+            if grid[i][j] == '@' and check(i,j):
+                p2 = p2 + 1
+                grid[i][j] = 'x'
+    if p2 == p2_old:
+        break
+    p2_old = p2
 
 print("part 1:", p1)
 print("part 2:", p2)
